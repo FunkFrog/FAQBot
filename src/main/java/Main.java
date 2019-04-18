@@ -5,6 +5,7 @@ import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
 import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import util.EmbedBuilders;
 import util.Init;
 import util.Tokens;
 
@@ -65,7 +66,8 @@ public class Main {
                                     .setColor(Tokens.EMBED_COLOR)));
                         }
                     } else {
-                        message.getServerTextChannel().ifPresent(ch -> ch.sendMessage("Could not find that FAQ!"));
+                        message.getServerTextChannel().ifPresent(ch -> ch.sendMessage(
+                                EmbedBuilders.failEmbed("Could not find that FAQ!")));
                     }
                 }
             } catch (Exception e) {

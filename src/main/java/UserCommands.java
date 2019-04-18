@@ -20,7 +20,7 @@ public class UserCommands implements CommandExecutor {
 
     @Command(aliases = "setmyfaq")
     public static void setMyFAQ(ServerTextChannel c, User u, String[] args) {
-        if (isModCreator(u)) {
+        if (!isModCreator(u)) {
             c.sendMessage(util.EmbedBuilders.permissionCheckFailed());
             return;
         }
@@ -61,7 +61,7 @@ public class UserCommands implements CommandExecutor {
 
     @Command(aliases = "removemyfaq")
     public static void removeMyFAQ(ServerTextChannel c, User u) {
-        if (isModCreator(u)) {
+        if (!isModCreator(u)) {
             c.sendMessage(util.EmbedBuilders.permissionCheckFailed());
             return;
         }
