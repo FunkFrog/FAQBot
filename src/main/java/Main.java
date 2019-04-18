@@ -31,7 +31,7 @@ class Main {
         FAQListener.addFAQListener();
 
         CommandHandler handler = new JavacordHandler(Init.api);
-        handler.setDefaultPrefix(Tokens.PREFIX);
+        handler.setDefaultPrefix(Tokens.COMMAND_PREFIX);
         handler.registerCommand(new UserCommands());
         handler.registerCommand(new AdminCommands());
     }

@@ -22,6 +22,12 @@ class AdminCommands implements CommandExecutor {
             c.sendMessage(util.EmbedBuilders.permissionCheckFailed());
             return;
         }
+
+        if (args.length < 2) {
+            c.sendMessage(EmbedBuilders.failEmbed("Please specify all arguments!"));
+            return;
+        }
+
         try {
             String command = args[0];
             String image = args[1];
@@ -44,6 +50,12 @@ class AdminCommands implements CommandExecutor {
             c.sendMessage(util.EmbedBuilders.permissionCheckFailed());
             return;
         }
+
+        if (args.length < 2) {
+            c.sendMessage(EmbedBuilders.failEmbed("Please specify all arguments!"));
+            return;
+        }
+
         try {
             String command = args[0];
             StringBuilder message = new StringBuilder();
@@ -70,6 +82,12 @@ class AdminCommands implements CommandExecutor {
             c.sendMessage(util.EmbedBuilders.permissionCheckFailed());
             return;
         }
+
+        if (args.length < 3) {
+            c.sendMessage(EmbedBuilders.failEmbed("Please specify all arguments!"));
+            return;
+        }
+
         try {
             String oldCommand = args[0];
             String command = args[1];
@@ -99,6 +117,12 @@ class AdminCommands implements CommandExecutor {
             c.sendMessage(util.EmbedBuilders.permissionCheckFailed());
             return;
         }
+
+        if (args.length < 1) {
+            c.sendMessage(EmbedBuilders.failEmbed("Please specify all arguments!"));
+            return;
+        }
+
         try {
             String command = args[0];
             if (SysFAQ.getSysFAQMessage(command).isPresent()) {

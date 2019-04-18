@@ -2,6 +2,7 @@ import database.SysFAQ;
 import database.UserFAQ;
 import util.EmbedBuilders;
 import util.Init;
+import util.Tokens;
 
 import java.util.Optional;
 
@@ -10,10 +11,10 @@ class FAQListener {
         Init.api.addMessageCreateListener(message -> {
             try {
                 String msg = message.getReadableMessageContent();
-                if (msg.isEmpty() || msg.length() < 5) return;
+                if (msg.isEmpty() || msg.length() < Tokens.LOOKUP_PREFIX.length()) return;
 
-                if (msg.substring(0, 4).equalsIgnoreCase("FAQ!")) {
-                    String command = msg.substring(4).toLowerCase();
+                if (msg.substring(0, Tokens.LOOKUP_PREFIX.length()).equalsIgnoreCase(Tokens.LOOKUP_PREFIX)) {
+                    String command = msg.substring(Tokens.LOOKUP_PREFIX.length()).toLowerCase();
                     Optional<String> userFAQ = UserFAQ.getFAQMessage(command);
                     Optional<String> sysFAQ = SysFAQ.getSysFAQMessage(command);
 

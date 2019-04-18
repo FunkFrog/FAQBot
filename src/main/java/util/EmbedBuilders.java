@@ -22,7 +22,7 @@ public class EmbedBuilders {
     public static EmbedBuilder successEmbed(String succ) {
         return new EmbedBuilder()
                 .setTitle(succ)
-                .setColor(Tokens.EMBED_COLOR)
+                .setColor(Tokens.USER_EMBED_COLOR)
                 .setFooter("FAQBot", Tokens.ICON);
     }
 
@@ -31,7 +31,7 @@ public class EmbedBuilders {
                 .setTitle("FAQ: " + FAQ.toUpperCase())
                 .setDescription(message)
                 .setFooter("FAQBot", Tokens.ICON)
-                .setColor(Tokens.EMBED_COLOR);
+                .setColor(Tokens.USER_EMBED_COLOR);
     }
 
     public static EmbedBuilder imageFAQEmbed(String command, String image) {
@@ -39,7 +39,7 @@ public class EmbedBuilders {
                 .setTitle("Official FAQ: " + command.toUpperCase())
                 .setImage(image)
                 .setFooter("FAQBot", Tokens.ICON)
-                .setColor(Tokens.EMBED_COLOR);
+                .setColor(Tokens.SYS_EMBED_COLOR);
     }
 
     public static EmbedBuilder sysFAQEmbed(String command, String message) {
@@ -47,6 +47,6 @@ public class EmbedBuilders {
                 .setTitle("Official FAQ: " + command.toUpperCase())
                 .setDescription(message)
                 .setFooter("FAQBot", Tokens.ICON)
-                .setColor(Tokens.EMBED_COLOR);
+                .setColor(Tokens.SYS_EMBED_COLOR);
     }
 }

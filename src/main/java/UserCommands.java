@@ -24,6 +24,12 @@ class UserCommands implements CommandExecutor {
             c.sendMessage(util.EmbedBuilders.permissionCheckFailed());
             return;
         }
+
+        if (args.length < 2) {
+            c.sendMessage(EmbedBuilders.failEmbed("Please specify all arguments!"));
+            return;
+        }
+
         try {
             String command = args[0];
             StringBuilder message = new StringBuilder();
@@ -89,8 +95,8 @@ class UserCommands implements CommandExecutor {
 
         EmbedBuilder embedBuilder = new EmbedBuilder()
                 .setTitle("FAQ List : Page " + (currPage + 1))
-                .setFooter("Use 'f!list <page>' to view more pages...", Tokens.ICON)
-                .setColor(Tokens.EMBED_COLOR);
+                .setFooter("Use '" + Tokens.COMMAND_PREFIX + "list <page>' to view more pages...", Tokens.ICON)
+                .setColor(Tokens.USER_EMBED_COLOR);
 
         for (int i = currPage; i < Init.registeredFAQs.size() && i < currPage + 5; i++) {
             embedBuilder.addField(Init.registeredFAQs.get(i)[0], Init.registeredFAQs.get(i)[1]);
@@ -122,10 +128,10 @@ class UserCommands implements CommandExecutor {
 
         StringBuilder commandList = new StringBuilder();
         commandList.append("__General Commands__\n" +
-                "**faq!<faq name>** - View **<faq name>**'s FAQ embed.\n");
+                "**" + Tokens.LOOKUP_PREFIX + "<faq name>** - View **<faq name>**'s FAQ embed.\n");
         for (String[] command : baseCommands) {
             commandList.append("**"
-                    .concat(Tokens.PREFIX)
+                    .concat(Tokens.COMMAND_PREFIX)
                     .concat(command[0])
                     .concat("** - ")
                     .concat(command[1])
@@ -137,7 +143,7 @@ class UserCommands implements CommandExecutor {
             commandList.append(separator).append("\n__Personal FAQ__\n");
             for (String[] command : modMakerCommands) {
                 commandList.append("**"
-                        .concat(Tokens.PREFIX)
+                        .concat(Tokens.COMMAND_PREFIX)
                         .concat(command[0])
                         .concat("** - ")
                         .concat(command[1])
@@ -149,7 +155,7 @@ class UserCommands implements CommandExecutor {
             commandList.append(separator).append("\n__Admin Commands__\n");
             for (String[] command : adminCommands) {
                 commandList.append("**"
-                        .concat(Tokens.PREFIX)
+                        .concat(Tokens.COMMAND_PREFIX)
                         .concat(command[0])
                         .concat("** - ")
                         .concat(command[1])
@@ -159,7 +165,7 @@ class UserCommands implements CommandExecutor {
         c.sendMessage(new EmbedBuilder()
                 .setTitle("Help")
                 .setDescription(commandList.toString())
-                .setColor(Tokens.EMBED_COLOR)
+                .setColor(Tokens.USER_EMBED_COLOR)
                 .setFooter("FAQBot", Tokens.ICON));
     }
 
