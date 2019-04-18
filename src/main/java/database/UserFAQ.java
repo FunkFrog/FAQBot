@@ -32,7 +32,7 @@ public class UserFAQ {
         }
     }
 
-    public static void addFaq(String command, String message, Long id) throws SQLException {
+    public static void addUserFAQ(String command, String message, Long id) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement("INSERT INTO faq VALUES (?, ?, ?)");
         statement.setLong(1, id);
         statement.setString(2, command);
@@ -42,7 +42,7 @@ public class UserFAQ {
         Init.refreshFAQs();
     }
 
-    public static void setFaq(String command, String message, Long id) throws SQLException {
+    public static void setUserFAQ(String command, String message, Long id) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement(
                 "UPDATE faq SET COMMAND = ?, MESSAGE = ? WHERE ID = ?");
         statement.setString(1, command);
@@ -53,7 +53,7 @@ public class UserFAQ {
         Init.refreshFAQs();
     }
 
-    public static void removeFaq(Long ID) throws SQLException {
+    public static void removeUserFAQ(Long ID) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement("DELETE FROM FAQ WHERE ID = ?");
         statement.setLong(1, ID);
         statement.execute();

@@ -25,4 +25,28 @@ public class EmbedBuilders {
                 .setColor(Tokens.EMBED_COLOR)
                 .setFooter("FAQBot", Tokens.ICON);
     }
+
+    public static EmbedBuilder userFAQEmbed(String FAQ, String message) {
+        return new EmbedBuilder()
+                .setTitle("FAQ: " + FAQ.toUpperCase())
+                .setDescription(message)
+                .setFooter("FAQBot", Tokens.ICON)
+                .setColor(Tokens.EMBED_COLOR);
+    }
+
+    public static EmbedBuilder imageFAQEmbed(String command, String image) {
+        return new EmbedBuilder()
+                .setTitle("Official FAQ: " + command.toUpperCase())
+                .setImage(image)
+                .setFooter("FAQBot", Tokens.ICON)
+                .setColor(Tokens.EMBED_COLOR);
+    }
+
+    public static EmbedBuilder sysFAQEmbed(String command, String message) {
+        return new EmbedBuilder()
+                .setTitle("Official FAQ: " + command.toUpperCase())
+                .setDescription(message)
+                .setFooter("FAQBot", Tokens.ICON)
+                .setColor(Tokens.EMBED_COLOR);
+    }
 }

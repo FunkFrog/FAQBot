@@ -12,7 +12,7 @@ import util.Tokens;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserCommands implements CommandExecutor {
+class UserCommands implements CommandExecutor {
 
     private static boolean isModCreator(User user) {
         return user.getRoles(Init.guild).contains(Init.user);
@@ -32,24 +32,24 @@ public class UserCommands implements CommandExecutor {
                 message.append(" ");
             }
 
-            ArrayList<String> cmds = new ArrayList<>();
+            ArrayList<String> usersCommands = new ArrayList<>();
 
             if (Database.getUsersFAQs(u.getId()).isPresent()) {
-                cmds = Database.getUsersFAQs(u.getId()).get();
+                usersCommands = Database.getUsersFAQs(u.getId()).get();
             }
 
             if (Database.FAQExists(command)) {
-                if (cmds.contains(command)) {
-                    UserFAQ.setFaq(command, message.toString(), u.getId());
+                if (usersCommands.contains(command)) {
+                    UserFAQ.setUserFAQ(command, message.toString(), u.getId());
                     c.sendMessage(EmbedBuilders.successEmbed("Set FAQ!"));
                 } else {
                     c.sendMessage(EmbedBuilders.failEmbed("Sorry, that command is already in use!"));
                 }
-            } else if (cmds.size() > 0) {
-                UserFAQ.setFaq(command, message.toString(), u.getId());
+            } else if (usersCommands.size() > 0) {
+                UserFAQ.setUserFAQ(command, message.toString(), u.getId());
                 c.sendMessage(EmbedBuilders.successEmbed("Set FAQ!"));
             } else {
-                UserFAQ.addFaq(command, message.toString(), u.getId());
+                UserFAQ.addUserFAQ(command, message.toString(), u.getId());
                 c.sendMessage(EmbedBuilders.successEmbed("Added FAQ!"));
             }
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class UserCommands implements CommandExecutor {
             return;
         }
         try {
-            UserFAQ.removeFaq(u.getId());
+            UserFAQ.removeUserFAQ(u.getId());
             c.sendMessage(EmbedBuilders.successEmbed("Removed your FAQs!"));
         } catch (SQLException e) {
             System.out.println("Exception removing FAQ.");
@@ -132,9 +132,9 @@ public class UserCommands implements CommandExecutor {
                     .concat("\n"));
         }
 
+        String separator = "------------------------------------------------------------------------------------";
         if (isModCreator(u)) {
-            commandList.append("------------------------------------------------------------------------------------" +
-                    "\n__Personal FAQ__\n");
+            commandList.append(separator).append("\n__Personal FAQ__\n");
             for (String[] command : modMakerCommands) {
                 commandList.append("**"
                         .concat(Tokens.PREFIX)
@@ -146,8 +146,7 @@ public class UserCommands implements CommandExecutor {
         }
 
         if (AdminCommands.isAdmin(u)) {
-            commandList.append("------------------------------------------------------------------------------------" +
-                    "\n__Admin Commands__\n");
+            commandList.append(separator).append("\n__Admin Commands__\n");
             for (String[] command : adminCommands) {
                 commandList.append("**"
                         .concat(Tokens.PREFIX)
@@ -163,4 +162,5 @@ public class UserCommands implements CommandExecutor {
                 .setColor(Tokens.EMBED_COLOR)
                 .setFooter("FAQBot", Tokens.ICON));
     }
+
 }

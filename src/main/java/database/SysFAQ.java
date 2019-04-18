@@ -19,6 +19,13 @@ public class SysFAQ {
         }
     }
 
+    public static boolean isImageEmbed(String command) throws SQLException {
+        PreparedStatement statement = Database.database.prepareStatement("SELECT IMAGE FROM sysfaq WHERE COMMAND = ?");
+        statement.setString(1, command);
+        ResultSet rs = statement.executeQuery();
+        return rs.next();
+    }
+
     public static Optional<String> getFAQImage(String command) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement("SELECT Image FROM sysfaq WHERE Command = ?");
         statement.setString(1, command.toLowerCase());
@@ -30,7 +37,7 @@ public class SysFAQ {
         }
     }
 
-    public static void addSystemImageFaq(String command, String image) throws SQLException {
+    public static void addSystemImageFAQ(String command, String image) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement("INSERT INTO sysfaq VALUES (?, ?, ?)");
         statement.setString(1, command.toLowerCase());
         statement.setString(2, "Image FAQ.");
@@ -40,14 +47,7 @@ public class SysFAQ {
         Init.refreshFAQs();
     }
 
-    public static boolean isImageEmbed(String command) throws SQLException {
-        PreparedStatement statement = Database.database.prepareStatement("SELECT IMAGE FROM sysfaq WHERE COMMAND = ?");
-        statement.setString(1, command);
-        ResultSet rs = statement.executeQuery();
-        return rs.next();
-    }
-
-    public static void addFaq(String command, String message) throws SQLException {
+    public static void addSysFAQ(String command, String message) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement("INSERT INTO SYSFAQ VALUES (?, ?, NULL)");
         statement.setString(1, command);
         statement.setString(2, message);
@@ -56,7 +56,7 @@ public class SysFAQ {
         Init.refreshFAQs();
     }
 
-    public static void setFaq(String command, String message, String oldCommand) throws SQLException {
+    public static void setSysFAQ(String command, String message, String oldCommand) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement(
                 "UPDATE faq SET COMMAND = ?, MESSAGE = ? WHERE COMMAND = ?");
         statement.setString(1, command);
@@ -67,7 +67,7 @@ public class SysFAQ {
         Init.refreshFAQs();
     }
 
-    public static void removeFaq(String command) throws SQLException {
+    public static void removeSysFAQ(String command) throws SQLException {
         PreparedStatement statement = Database.database.prepareStatement("DELETE FROM FAQ WHERE COMMAND = ?");
         statement.setString(1, command);
         statement.execute();

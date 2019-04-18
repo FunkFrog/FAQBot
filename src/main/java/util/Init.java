@@ -5,7 +5,6 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
-import org.javacord.api.entity.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;

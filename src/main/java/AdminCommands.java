@@ -10,7 +10,7 @@ import util.Init;
 
 import java.sql.SQLException;
 
-public class AdminCommands implements CommandExecutor {
+class AdminCommands implements CommandExecutor {
     static boolean isAdmin(User user) {
         return user.getRoles(Init.guild).contains(Init.admin)
             || Init.authorizedUsers.contains(user.getId());
@@ -26,7 +26,7 @@ public class AdminCommands implements CommandExecutor {
             String command = args[0];
             String image = args[1];
             if (!Database.FAQExists(command)) {
-                SysFAQ.addSystemImageFaq(command, image);
+                SysFAQ.addSystemImageFAQ(command, image);
                 c.sendMessage(EmbedBuilders.successEmbed("Added image embed!"));
             } else {
                 c.sendMessage(EmbedBuilders.failEmbed("Command already exists!"));
@@ -52,7 +52,7 @@ public class AdminCommands implements CommandExecutor {
                 message.append(" ");
             }
             if (!Database.FAQExists(command)) {
-                SysFAQ.addFaq(command, message.toString());
+                SysFAQ.addSysFAQ(command, message.toString());
                 c.sendMessage(EmbedBuilders.successEmbed("Added FAQ!"));
             } else {
                 c.sendMessage(EmbedBuilders.failEmbed("Command already exists!"));
@@ -79,7 +79,7 @@ public class AdminCommands implements CommandExecutor {
                 message.append(" ");
             }
             if (SysFAQ.getSysFAQMessage(command).isPresent()) {
-                SysFAQ.setFaq(command, message.toString(), oldCommand);
+                SysFAQ.setSysFAQ(command, message.toString(), oldCommand);
                 c.sendMessage(EmbedBuilders.successEmbed("Set FAQ!"));
             } else if (Database.FAQExists(command)) {
                 c.sendMessage(EmbedBuilders.failEmbed("FAQ is not a system FAQ!"));
@@ -102,10 +102,10 @@ public class AdminCommands implements CommandExecutor {
         try {
             String command = args[0];
             if (SysFAQ.getSysFAQMessage(command).isPresent()) {
-                SysFAQ.removeFaq(command);
+                SysFAQ.removeSysFAQ(command);
                 c.sendMessage(EmbedBuilders.successEmbed("Removed system FAQ!"));
             } else if (UserFAQ.getFAQOwner(command).isPresent()) {
-                UserFAQ.removeFaq(UserFAQ.getFAQOwner(command).get());
+                UserFAQ.removeUserFAQ(UserFAQ.getFAQOwner(command).get());
                 c.sendMessage(EmbedBuilders.successEmbed("Removed user's FAQ(s)!"));
             } else {
                 c.sendMessage(EmbedBuilders.failEmbed("FAQ does not exist!"));
