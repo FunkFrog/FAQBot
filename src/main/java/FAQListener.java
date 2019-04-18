@@ -14,14 +14,14 @@ class FAQListener {
 
                 if (msg.substring(0, 4).equalsIgnoreCase("FAQ!")) {
                     String command = msg.substring(4).toLowerCase();
-                    Optional<String> faq = UserFAQ.getFAQMessage(command);
-                    Optional<String> sysfaq = SysFAQ.getSysFAQMessage(command);
+                    Optional<String> userFAQ = UserFAQ.getFAQMessage(command);
+                    Optional<String> sysFAQ = SysFAQ.getSysFAQMessage(command);
 
-                    if (faq.isPresent()) {
+                    if (userFAQ.isPresent()) {
                         message.getServerTextChannel().ifPresent(ch -> ch.sendMessage(
-                                EmbedBuilders.userFAQEmbed(command, faq.get())));
+                                EmbedBuilders.userFAQEmbed(command, userFAQ.get())));
 
-                    } else if (sysfaq.isPresent()) {
+                    } else if (sysFAQ.isPresent()) {
                         if (SysFAQ.isImageEmbed(command)) {
                             Optional<String> image = SysFAQ.getFAQImage(command);
 
@@ -31,7 +31,7 @@ class FAQListener {
 
                         } else {
                             message.getServerTextChannel().ifPresent(ch -> ch.sendMessage(
-                                    EmbedBuilders.sysFAQEmbed(command, sysfaq.get())));
+                                    EmbedBuilders.sysFAQEmbed(command, sysFAQ.get())));
 
                         }
                     } else {
