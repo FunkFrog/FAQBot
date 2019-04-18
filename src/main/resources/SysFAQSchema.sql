@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS sysfaq;
+
+CREATE TABLE sysfaq
+(
+    Command VARCHAR(20)  NOT NULL,
+    Message VARCHAR(512) NOT NULL,
+    Image VARCHAR(256)
+);

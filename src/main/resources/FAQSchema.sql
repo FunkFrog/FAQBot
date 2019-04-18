@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS faq;
+
+CREATE TABLE faq
+(
+    ID      BIGINT       PRIMARY KEY,
+    Command VARCHAR(20)  NOT NULL,
+    Message VARCHAR(512) NOT NULL
+);
